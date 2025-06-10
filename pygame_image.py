@@ -17,20 +17,22 @@ def main():
     kk_rct.center = 300, 200
 
     tmr = 0
+    move =[0, 0]
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
         key_list = pg.key.get_pressed() #キーの押下状態を取得
         if key_list[pg.K_UP]:
-            kk_rct.move_ip(0, -1) #上キーが押されたら上に移動
-        if key_list[pg.K_DOWN]:
-            kk_rct.move_ip(0, +1)
-        if key_list[pg.K_LEFT]:
-            kk_rct.move_ip(-1, 0)
-        if key_list[pg.K_RIGHT]:
-            kk_rct.move_ip(+1, 0)
+            move = [-1, -1] #上キーが押されたら上に移動
+        elif key_list[pg.K_DOWN]:
+            move = [-1, 1]
+        elif key_list[pg.K_LEFT]:
+            move = [-1, 0]
+        elif key_list[pg.K_RIGHT]:
+            move = [1, 0]
         else:
-            kk_rct.move_ip(-1, 0)
+            move = [-1, 0]
+        kk_rct.move_ip(move)
         x = tmr%3200
 
         screen.blit(bg_img, [-x, 0])
